@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Character Library</title>
+	<script src = "js/jquery.js" DEFER></script>
+	<script src = "js/character.js" DEFER></script>
+	<link rel=stylesheet href="css/default.css" type="text/css">
+	<link href="favicon.png" rel="icon">
+</head>
+<body>
+	<main>
+		<section>
+			<form>
+				<div>
+					<label for="characterName">Character Name</label>
+					<input type=text id="characterName" name="characterName" size=30>
+				</div>
+				<div>
+					<label for="characterGender">Character Gender</label>
+					<select id="characterGender" name="characterGender">
+						<option>Male</option>
+						<option>Female</option>
+					</select>
+				</div>
+				<div>
+					<label for="characterRace">Character Race</label>
+					<select id="characterRace" name="characterRace">
+						<option>Human</option>
+						<option>Elf</option>
+						<option>Dwarf</option>
+						<option>Fairy</option>
+						<option>Droid</option>
+						<option>Beast</option>
+					</select>
+				</div>
+				<div>
+					<label for="characterClass">Character Class</label>
+					<select id="characterClass" name="characterClass">
+						<option>Warrior</option>
+						<option>Ranger</option>
+						<option>Mage</option>
+					</select>
+				</div>
+				<div>
+					<label for="characterLevel">Character Level</label>
+					<input type=number style="text-align: right;" min=1 value="1" id="characterLevel" name="characterLevel" size=3>
+				</div>
+				<div>
+					<label for="characterDescription">Character Description</label>
+					<textarea type=text id="characterDescription" name="characterDescription" cols=30></textarea>
+				</div>
+				<div>
+					<input type=button id="submitButton" name="submitButton" value="Submit">
+				</div>
