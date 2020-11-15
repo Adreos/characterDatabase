@@ -5,7 +5,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/../client/browsecharacter.html')));
-console.log(path.join(__dirname + '/../client'));
 var outputFile = './files/characters.txt';
 
 //OLD MANUAL TRANSFERS. REPLACED WITH WILDCARD BELOW
@@ -46,7 +45,6 @@ app.post('/write-character',function(req,res){
 		}
 	});
 });
-
 app.get('/read-records', function(req,res) {
 		fs.readFile(outputFile,"utf8",function(err,data){
 			if(err) {
@@ -57,14 +55,38 @@ app.get('/read-records', function(req,res) {
 			}
 		});
 	});
+app.post('/delete-records', function(req,res) {
+	var deleteid = req.body.id;
+		fs.readFile(outputFile,"utf8",function(err,data){
+			if(err) {
+				res.send(err);
+			} else {
+				var olddata = JSON.parse("[" + data + "]"), newdata = new Array();
+				for(var x=0;x<olddata.length;x++)
+				{
+					if(olddata[x].ID != deleteid)
+						newdata.push(olddata[x]);
+				}
+				data = JSON.stringify(newdata);
+				data = data.substring(1,(data.length-1));
+				fs.writeFile(outputFile,data,function(err){
+					if(err) {
+						res.send(err);
+					} else {
+						res.send("[" + data + "]");
+					}
+				});
+			}
+		});
+	});
 //Default GET
 app.get('/',function(req,res){
-	res.status(200).sendFile(path.join(__dirname + '/../client/browsecharacter.html'));
+	res.status(200).sendFile(path.join(__dirname + '/../client/index.html'));
 });
 
 //Wildcard GET
 app.get('/*',function(req,res){
-	res.status(200).sendFile(path.join(__dirname + '/../client' + req._parsedOriginalUrl.href));
+	res.status(200).sendFile(path.join(__dirname + '/../client' + req._parsedOriginalUrl.pathname));
 
 });
 

@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Browse characters</title>
+		<title>Ragel Characters</title>
 		<script src = "./js/jquery.js" defer></script>
 		<script src = "./js/character.js" defer></script>
 		<link rel=stylesheet href="css/default.css" type="text/css">
@@ -10,18 +10,21 @@
 	</head>
 	<body>
 		<table id="displayTable">
-			<tr><th colspan=7>Ragel Character Listing</th></tr>
+			<tr><th colspan=8>Ragel Character Listing</th></tr>
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
-				<th>Gender</th>
-				<th>Race</th>
-				<th>Class</th>
-				<th>Level</th>
+				<th colspan=2><a onClick="sort('ID');">ID</a></th>
+				<th><a onClick="sort('Name');">Name</a></th>
+				<th><a onClick="sort('Gender');">Gender</a></th>
+				<th><a onClick="sort('Race');">Race</a></th>
+				<th><a onClick="sort('Class');">Class</a></th>
+				<th><a onClick="sort('Level');">Level</a></th>
 				<th>Description</th>
 			</tr>
 		</table>
-		<div class="link"><a href="writecharacter.html">Add Character</a></div>
+		<div id="confirmBox">
+			<p>Are you really sure you want to delete</p><p id="confirmId"></p><input type=button id="confirmButton" value="Yes"><input type=button id="cancelButton" value="Cancel">
+		</div>
+		<div id="linkback"><a href="writecharacter.html">Add Character</a></div>
 	</body>
 </html>
 	

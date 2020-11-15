@@ -9,6 +9,19 @@ body
 	background-image: linear-gradient(to right, rgba(0,0,0,0) 5%, rgba(0,0,0,0.75) 20%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0) 95%), url('background.png');
 	background-size: auto auto, 116px 69px;
 	color: white;
+	animation: scroll 20s infinite linear;
+}
+@keyframes scroll {
+ from {
+	background-position: 0px 0px,0px 0px;
+	}
+ to{
+	background-position: 0px 0px,930px 274px;
+	}
+}
+a
+{
+	color: white;
 }
 #displayTable {
 	position: relative;
@@ -41,19 +54,20 @@ body
 }
 #displayTable tr:nth-child(even) td, #displayTable tr:nth-child(even) th
 {
-	background-color: rgba(0,0,155,0.75);
+	background-color: rgba(68,164,214,0.5);
 }
 #displayTable tr:nth-child(odd) td
 {
-	background-color: rgba(0,0,100,0.5);
+	background-color: rgba(68,164,214,0.25);
+}
+#displayTable a
+{
+	cursor: pointer;
+	text-decoration: underline;
 }
 div.link
 {
 	text-align: center;
-}
-a
-{
-	color: rgb(0,0,255);
 }
 form
 {
@@ -130,4 +144,91 @@ form div:last-of-type input
 form textarea
 {
 	height: 130px;
+}
+div#mainMenu
+{
+  max-width: 600px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 50%;
+	vertical-align: middle;
+	min-width: 900px;
+	text-align: center;
+}
+#mainMenu h1, form h1
+{
+	font-family: ragel;
+	margin: 0px;
+	font-size: 60pt;
+	text-align: center;
+}
+#mainMenu a
+{
+	position: relative;
+	display: inline-block;
+	width: 45%;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	font-size: 40pt;
+	padding-top: 13%;
+	border-radius: 65px;
+	box-sizing: border-box;
+	border: 10px inset rgba(68,164,214,0.5);
+	box-shadow: 0 0 3em rgba(255,255,255,0.5) inset, 0 0 3em rgba(68,164,214,1);
+	background-color: rgba(68,164,214,0.5);
+	margin: 10% 2%;
+	color: white;
+	font-family: ragel;
+}
+#mainMenu a:HOVER
+{
+	font-weight: bold;
+}
+#confirmBox
+{
+	display: none;
+	z-index: 2;
+	padding: 25px;
+	border: 10px inset rgba(68,164,214,0.5);
+	box-shadow: 0 0 3em rgba(255,255,255,0.5) inset, 0 0 3em rgba(68,164,214,1);
+	background-color: rgba(68,164,214,0.95);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	border-radius: 25px;
+	font-family: ragel;
+	font-size: 20pt;
+	text-align: center
+}
+#confirmBox p
+{
+	line-height: 1.5em;
+	margin: 0px;
+}
+#confirmBox input
+{
+	width: 45%;
+	font-size: 20pt;
+	padding: 25px;
+	font-family: ragel;
+	border-radius: 25px;
+	margin: 5px;
+	background-color: rgba(11,28,36,0.5);
+	color: white;
+}
+#confirmBox input:HOVER
+{
+	background-color: rgba(11,28,36,0.75);
+}
+#linkback
+{
+	position: absolute;
+	text-align: center;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
 }
