@@ -145,3 +145,5 @@ $('#confirmButton').click(function(){
 		}
 	});
 });
+//Fix Bottom Bar
+$('#linkback').html('<a href="/">Home</a> &mdash; <a href="browsecharacter.html">Browse Characters</a> &mdash; <a href="writecharacter.html">Write Character</a>');
