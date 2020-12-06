@@ -232,3 +232,88 @@ div#mainMenu
 	left: 50%;
 	transform: translateX(-50%);
 }
+div#characterTable
+{
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 700px;
+	height: 400px;
+	transform: translate(-50%,-50%);
+	border: 10px inset rgba(68,164,214,0.5);
+	background-color: rgba(68,164,214,0.5);
+	border-radius: 25px;
+	
+}
+div#characterTable #spot
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+div#characterTable #charname
+{
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	background-color: rgba(68,164,214,0.95);
+	font-size: 35px;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	font-family: ragel;
+	height: 50px;
+	vertical-align: middle;
+}
+div#characterTable #charid,
+div#characterTable #chargender,
+div#characterTable #charrace,
+div#characterTable #charclass,
+div#characterTable #charlevel
+{
+	width: 50%;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	font-size: 25px;
+	border-bottom: 1px solid rgba(68,164,214,0.5);
+}
+div#characterTable #chardescription
+{
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	width: 50%;
+	font-size: 20px;
+	padding: 5px;
+	box-sizing: border-box;
+}
+div#characterTable #lowerpanel
+{
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: rgba(68,164,214,0.95);
+	font-size: 35px;
+	padding: 5px 10px;
+	box-sizing: border-box;
+	font-family: ragel;
+	height: 50px;
+	vertical-align: middle;
+	bottom: 0px;
+	position: absolute;
+	width: 100%;
+}
+#lowerpanel button
+{
+	width: 50%;
+	height: 100%;
+	border: none;
+	background-color: transparent;
+	color: white;
+	font-family: ragel;
+	font-size: 35px;
+	cursor: pointer;
+}
+#lowerpanel button:HOVER
+{
+	text-shadow: 0 0 5px black;
+}
