@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Ragel Characters</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" DEFER></script>
+		<script src = "./js/jquery.js" DEFER></script>
+		<script src = "./js/config.js" DEFER></script>
+		<script src = "./js/character.js" DEFER></script>
+		<link rel=stylesheet href="css/default.css" type="text/css">
+		<link href="favicon.png" rel="icon">
+	</head>
+	<body>
+		<div id="characterTable" data-ng-app="browseCharacters"  data-ng-controller="browseCharactersCntl">
+			<div id="charname" class="charFade" data-ng-model="name">Name: {{ obj.characterName }}</div>
+			<div id="charid" class="charFade" data-ng-model="if">ID : {{ obj.ID }}</div>
+			<div id="chargender" class="charFade" data-ng-model="gender">Gender: {{ obj.characterGender }}</div>
+			<div id="charrace" class="charFade" data-ng-model="race">Race: {{ obj.characterRace }}</div>
+			<div id="charclass" class="charFade" data-ng-model="class">Class: {{ obj.characterClass }}</div>
+			<div id="charlevel" class="charFade" data-ng-model="level">Level: {{ obj.characterLevel }}</div>
+			<div id="chardescription" class="charFade" data-ng-model="description"><div class="u">Description</div>{{ obj.characterDescription }}</div>
+			<div id="lowerpanel" class="charFade">
+				<button id="previousButton" data-ng-click="changeCharacter(-1)">&lt;&lt;&lt;&nbsp;Previous</button><button id="nextButton" data-ng-click="changeCharacter(1)">Next&nbsp;&gt;&gt;&gt;</button>
+				<div id="spot">{{spot}}</div>
+			</div>
+		</div>
+		<div id="linkback"><a href="writecharacter.html">Add Character</a></div>
+	</body>
+</html>
+	
+
