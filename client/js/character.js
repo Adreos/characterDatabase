@@ -17,7 +17,7 @@ $('#submitButton').click(function(){
 			'characterLevel': characterLevel,
 			'characterDescription':characterDescription});
 	$.ajax({
-		url: "http://localhost:5000/write-character",
+		url: libraryURL + "/write-character",
 		type: "post",
 		data: {'data' : jsonString},
 		success: function(response) {
@@ -31,7 +31,7 @@ $('#submitButton').click(function(){
 
 function getData(){
 	$.ajax({
-		url: "http://localhost:5000/read-records",
+		url: libraryURL + "/read-records",
 		type: "get",
 		success: function(response) {
 			var data = jQuery.parseJSON(response);
@@ -42,7 +42,7 @@ function getData(){
 var lastsorttype = '';
 function sort(type){
 	$.ajax({
-		url: "http://localhost:5000/read-records",
+		url: libraryURL + "/read-records",
 		type: "get",
 		success: function(response) {
 			var data = jQuery.parseJSON(response), order = new Array(), name = new Array(), tempspot, tempdata, tempname, changed;
@@ -132,7 +132,7 @@ $('#confirmButton').click(function(){
 	$('#confirmBox p:first-of-type').text("Processing");
 	$('#confirmBox p:not(:first-of-type)').slideUp();
 	$.ajax({
-		url: "http://localhost:5000/delete-records",
+		url: libraryURL + "/delete-records",
 		type: "post",
 		data: {id : confid},
 		success: function(response) {
@@ -145,5 +145,56 @@ $('#confirmButton').click(function(){
 		}
 	});
 });
-//Fix Bottom Bar
-$('#linkback').html('<a href="/">Home</a> &mdash; <a href="browsecharacter.html">Browse Characters</a> &mdash; <a href="writecharacter.html">Write Character</a>');
+$('#linkback').html('<a href="/">Home</a> &mdash; <a href="browsecharacter.html">Browse Characters</a> &mdash; <a href="view-character.html">View Characters</a> &mdash; <a href="writecharacter.html">Write Character</a>');
+
+//START ANGULAR CODE
+//THIS IF STATEMENT LOCKS OUT THE ANGULAR CODE UNLESS ANGULAR HAS BEEN INCLUDED
+if(typeof angular == "object")
+{
+	$("#characterTable").slideDown();
+
+var app = angular.module("browseCharacters",[]);
+
+
+var characters = [];
+var activeCharacter = 0;
+
+app.controller("browseCharactersCntl", function($scope,$http){
+	$scope.obj = [];
+
+	$scope.get_character = function() {
+		$http({
+			method: "get",
+			url: libraryURL + "/read-characters"
+		}).then(function(response) {
+			if(response.data.msg === "SUCCESS") {
+				characters = response.data.data;
+				$scope.obj = characters[activeCharacter];
+				$scope.spot = activeCharacter+1;
+			}
+			else {
+				console.log("Data Unknown");
+				console.log(response);
+			}
+		}, function(response) {
+			console.log("FAILURE: " + response);
+		});
+	};
+
+	$scope.get_character();
+
+	$scope.changeCharacter = function(direction) {
+		activeCharacter += direction;
+		if(activeCharacter < 0)
+			activeCharacter = characters.length-1;
+		if(activeCharacter >= characters.length)
+			activeCharacter = 0;
+		$scope.obj = characters[activeCharacter];
+		$scope.spot = activeCharacter+1;
+	}
+/*	$scope.showHide = function() {
+		$scope.hidePrev = (activeSpell === 0) ? true : false;
+		$scope.hideNext = (activeSpell === spells.length-1) ? true : false;
+	}*/
+});
+}
