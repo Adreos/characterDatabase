@@ -1,7 +1,6 @@
 const express = require('express'), fs = require('fs'), bodyParser = require('body-parser'), path = require('path');
 const app = express();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/../client/browsecharacter.html')));

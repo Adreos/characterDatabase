@@ -1,13 +1,19 @@
+const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
+	const dbURL = (process.env.DB_URI || "mongodb://localhost") + ":27017";
 const path = require("path");
+
+
 
 var services = function services(app) {
 	
 	app.post('/write-character',function(req,res){
-	var data = req.body.data;
-//	Debug Log command, unneed but left for easy debug
-//	console.log(data);
+	var newData = JSON.parse(req.body.data);
 
-	if(fs.existsSync(outputFile)) {
+//	Debug Log command, unneed but left for easy debug
+//	console.log(newData);
+
+/*	if(fs.existsSync(outputFile)) {
 		data = "," + data;
 	}
 	fs.appendFile(outputFile,data,function(err){
@@ -16,12 +22,27 @@ var services = function services(app) {
 		} else {
 			res.send("SUCCESS");
 		}
+	});*/
+	MongoClient.connect(dbURL,{useUnifiedTopology:true},function(err,client){
+		if(err) {
+			return res.status(200).send(JSON.stringify({msg:"Connection Error: " + err}));
+		} else {
+			var dbo = client.db("ragel");
+				dbo.collection("characters").insertOne(newData,function(err,response){
+				client.close();
+				if(err) {
+					return res.status(200).send(JSON.stringify({msg:"Sending Error: " + err}));
+				} else {
+					return res.status(200).send(JSON.stringify({msg:"SUCCESS"}));
+				}
+			});
+		}
 	});
 });
 
 app.post('/delete-records', function(req,res) {
 	var deleteid = req.body.id;
-		fs.readFile(outputFile,"utf8",function(err,data){
+/*		fs.readFile(outputFile,"utf8",function(err,data){
 			if(err) {
 				res.send(err);
 			} else {
@@ -41,7 +62,32 @@ app.post('/delete-records', function(req,res) {
 					}
 				});
 			}
-		});
+		});*/
+	MongoClient.connect(dbURL,{useUnifiedTopology:true},function(err,client){
+		if(err) {
+			return res.status(200).send(JSON.stringify({msg:"Connection Error: " + err}));
+		} else {
+			var dbo = client.db("ragel");
+			var query = {"ID":deleteid};
+				dbo.collection("characters").deleteOne(query,function(err,response){
+				if(err) {
+					client.close();
+					return res.status(200).send(JSON.stringify({msg:"Sending Error: " + err}));
+				} else {
+//					return res.status(200).send(JSON.stringify({msg:"SUCCESS"}));	
+					dbo.collection("characters").find().toArray(function(err,data){
+					client.close();
+					if(err) {
+						return res.status(200).send(JSON.stringify({msg:"Transmit Error: " + err}));
+					} else {
+						return res.status(200).send(JSON.stringify(data));
+					}
+				});
+					//
+				}
+			});
+		}
+	});
 	});
 }
 
