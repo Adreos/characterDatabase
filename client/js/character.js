@@ -9,7 +9,7 @@ $('#submitButton').click(function(){
 
 	var d = new Date();
 	var ID = 'char' + d.getTime();
-		var jsonString = JSON.stringify({'ID': ID,
+	var jsonString = JSON.stringify({'ID': ID,
 			'characterName': characterName,
 			'characterGender': characterGender,
 			'characterRace': characterRace,
@@ -35,6 +35,7 @@ function getData(){
 		type: "get",
 		success: function(response) {
 			var data = jQuery.parseJSON(response);
+			console.log(data);
 			createCharacterTable(data);
 		}
 	});
