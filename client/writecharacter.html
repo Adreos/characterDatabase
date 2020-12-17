@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<title>Character Creation</title>
-	<script src = "js/jquery.js" DEFER></script>
+	<title id="Title">Character Creation</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" DEFER></script>
+	<script src = "./js/config.js" defer></script>
 	<script src = "js/character.js" DEFER></script>
 	<link rel=stylesheet href="css/default.css" type="text/css">
 	<link href="favicon.png" rel="icon">
 </head>
-<body>
+<body data-ng-app="browseCharacters"  data-ng-controller="WriteCharactersCntl">
 	<main>
 		<section>
 			<form>
-				<h1>Create A New Character</h1>
+				<input type=hidden name="characterID" id="characterID" value="">
+				<h1 id="topLabel">Create A New Character</h1>
 				<div>
 					<label for="characterName">Character Name</label>
-					<input type=text id="characterName" name="characterName" size=30>
+					<input type=text id="characterName" name="characterName" size=30 value="{{obj.characterName}}">
 				</div>
 				<div>
 					<label for="characterGender">Character Gender</label>
@@ -44,14 +46,14 @@
 				</div>
 				<div>
 					<label for="characterLevel">Character Level</label>
-					<input type=number style="text-align: right;" min=1 value="1" id="characterLevel" name="characterLevel" size=3>
+					<input type=number style="text-align: right;" min=1 value="{{obj.characterLevel}}" id="characterLevel" name="characterLevel" size=3>
 				</div>
 				<div>
 					<label for="characterDescription">Character Description</label>
-					<textarea type=text id="characterDescription" name="characterDescription" cols=30></textarea>
+					<textarea type=text id="characterDescription" name="characterDescription" cols=30>{{obj.characterDescription}}</textarea>
 				</div>
 				<div>
-					<input type=button id="submitButton" name="submitButton" value="Submit">
+					<input type=button id="submitButton" name="submitButton" data-ng-click="submitCharacter();" value="Submit">
 				</div>
 			</form>
 			<div id="linkback"><a href="browsecharacter.html">Back to Browse Characters</a></div>

@@ -3,30 +3,62 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Ragel Characters</title>
-		<script src = "./js/jquery.js" defer></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" DEFER></script>
 		<script src = "./js/config.js" defer></script>
 		<script src = "./js/character.js" defer></script>
 		<link rel=stylesheet href="css/default.css" type="text/css">
 		<link href="favicon.png" rel="icon">
 	</head>
-	<body>
+	<body data-ng-app="browseCharacters"  data-ng-controller="browseCharactersTableCntl">
 		<table id="displayTable">
 			<tr><th colspan=8>Ragel Character Listing</th></tr>
 			<tr>
 				<th colspan=2><a onClick="sort('ID');">ID</a></th>
-				<th><a onClick="sort('Name');">Name</a></th>
-				<th><a onClick="sort('Gender');">Gender</a></th>
-				<th><a onClick="sort('Race');">Race</a></th>
-				<th><a onClick="sort('Class');">Class</a></th>
-				<th><a onClick="sort('Level');">Level</a></th>
+				<th><a data-ng-click="sort('Name')">Name</a></th>
+				<th><a data-ng-click="sort('Gender');">Gender</a></th>
+				<th><a data-ng-click="sort('Race');">Race</a></th>
+				<th><a data-ng-click="sort('Class');">Class</a></th>
+				<th><a data-ng-click="sort('Level');">Level</a></th>
 				<th>Description</th>
 			</tr>
+			<tr data-ng-repeat="x in list">
+				<td><button  data-ng-click="updateCharacter($event);" charid="{{x.ID}}" charname="{{x.characterName}}">Update</button>
+				<br><button data-ng-click="deleteCharacter($event);" charid="{{x.ID}}" charname="{{x.characterName}}">Delete</button></td>
+				<td>{{x.ID}}</td>
+				<td>{{x.characterName}}</td>
+				<td>{{x.characterGender}}</td>
+				<td>{{x.characterRace}}</td>
+				<td>{{x.characterClass}}</td>
+				<td>{{x.characterLevel}}</td>
+				<td>{{x.characterDescription}}</td>
+			</tr>
 		</table>
-		<div id="confirmBox">
-			<p>Are you really sure you want to delete</p><p id="confirmId"></p><input type=button id="confirmButton" value="Yes"><input type=button id="cancelButton" value="Cancel">
+		<div id="showAll">
+			Show &mdash; 
+			Gender: <select id="characterGender">
+				<option value="">-ALL-</option>
+				<option>Male</option>
+				<option>Female</option>
+			</select> &mdash; 
+			Race: <select id="characterRace">
+				<option value="">-ALL-</option>
+				<option>Human</option>
+				<option>Elf</option>
+				<option>Dwarf</option>
+				<option>Fairy</option>
+				<option>Droid</option>
+				<option>Beast</option>
+			</select> &mdash; 
+			Class: <select id="characterClass">
+				<option value="">-ALL-</option>
+				<option>Warrior</option>
+				<option>Ranger</option>
+				<option>Mage</option>
+			</select>
+			<button data-ng-click="filterCharacter();">Filter</button>
 		</div>
+		<div id="confirmBox">
+			<p>Are you really sure you want to delete</p><p id="confirmId"></p><input type=button data-ng-click="deleteConfirm();" value="Yes"><input type=button data-ng-click="deleteCancel();" value="Cancel"></div>
 		<div id="linkback"><a href="writecharacter.html">Add Character</a></div>
 	</body>
 </html>
-	
-
