@@ -30,6 +30,19 @@ a
 	left: 5%;
 	margin-top: 5%;
 }
+#displayTable button
+{
+	width: 100%;
+	background-color: rgba(68,164,214,0.5);
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+#displayTable button:HOVER
+{
+	background-color: rgba(68,164,214,0.75);
+	font-style: italic;
+}
 #displayTable tr:first-of-type th
 {
 	font-size: 4em;
@@ -234,7 +247,6 @@ div#mainMenu
 }
 div#characterTable
 {
-	display: none;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -316,4 +328,17 @@ div#characterTable #lowerpanel
 #lowerpanel button:HOVER
 {
 	text-shadow: 0 0 5px black;
+}
+#showAll
+{
+	border-radius: 10px;
+	border: 3px inset rgba(68,164,214,0.5);
+	background-color: rgba(68,164,214,0.5);
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 25px;
+	padding: 5px;
+	box-sizing: border-box;
 }
